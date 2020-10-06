@@ -9,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import './ChatMessage.css';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 500,

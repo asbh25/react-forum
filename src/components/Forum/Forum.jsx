@@ -52,7 +52,6 @@ export const Forum = () => {
       <TextField
         required
         id="standard-required"
-        // label="Say something nice"
         defaultValue="Say something nice" 
         value={formValue}
         onChange={({ target }) => setFormValue(target.value)}
@@ -73,11 +72,11 @@ export const Forum = () => {
 
     <div className="container">
       {messages && messages
-      .sort((a, b) => b.createdAt - a.createdAt)
-      .map(msg => 
-        <ChatMessage key={msg.id} message={msg} />
-      )
-    }
+        .sort((a, b) => b.createdAt - a.createdAt)
+        .map(msg => 
+          <ChatMessage key={msg.id} message={msg} />
+        )
+      }
     </div>
   </>);
 }
