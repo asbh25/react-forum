@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
 import { ChatMessage } from '../ChatMessage';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 
 import firebase, { auth, firestore } from '../../firebase/firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
+
 export const Forum = () => {
+  const classes = useStyles();
   const messagesRef = firestore.collection('messages');
   const query = messagesRef.orderBy('createdAt').limit(25);
 
@@ -23,21 +35,22 @@ export const Forum = () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
       photoURL
-    })
+    });
 
     setFormValue('');
   }
 
   return (<>
-    <main>
-      <h1>We're in forum!</h1>
-      {messages && messages.map(msg => 
-        <ChatMessage key={msg.id} message={msg} />
-      )}
-    </main>
-
-    <form onSubmit={sendMessage}>
-
+    <form onSubmit={sendMessage} className={classes.root}>
+      {/* <TextField
+        required
+        id="standard-required"
+        label="Say something nice"
+        defaultValue="Say something nice" 
+        value={formValue}
+        onChange={({ target }) => setFormValue(target.value)}
+        placeholder="Say something nice"
+      /> */}
       <input
         value={formValue}
         onChange={({ target }) => setFormValue(target.value)}
@@ -47,5 +60,9 @@ export const Forum = () => {
       <button type="submit" disabled={!formValue}>Send</button>
 
     </form>
+
+    {messages && messages.map(msg => 
+      <ChatMessage key={msg.id} message={msg} />
+    )}
   </>);
 }

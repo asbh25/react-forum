@@ -1,13 +1,11 @@
 import React from 'react';
 import { Header } from './components/Header';
-import { SignIn, SignOut } from './components/SignInOut';
+import { SignIn } from './components/SignInOut';
 import { Forum } from './components/Forum';
 
 import { auth } from './firebase/firebase';
-import 'firebase/firestore';
-import 'firebase/auth';
-
 import { useAuthState } from 'react-firebase-hooks/auth';
+
 import './App.css';
 
 function App() {
@@ -16,13 +14,12 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Header />
-        <SignOut />
+        <Header  user={user} />
       </header>
 
-      <section>
+      <main className="main">
         {user ? <Forum /> : <SignIn />}
-      </section>
+      </main>
     </div>
   );
 }

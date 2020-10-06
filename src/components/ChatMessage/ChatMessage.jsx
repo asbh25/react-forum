@@ -1,15 +1,52 @@
-import React from 'react';
-import { auth } from '../../firebase/firebase';
+import React, { useState } from 'react';
 
-export const ChatMessage = (props) => {
-  const { text, uid, photoURL } = props.message;
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-  const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: 500,
+    margin: 'auto',
+  },
+}));
 
-  return (<>
-    <div className={`message ${messageClass}`}>
-      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} alt="avatar" />
-      <p>{text}</p>
-    </div>
-  </>)
+const getDateFrom = timestramp => {
+  if (timestramp) {
+    return timestramp.toDate().toDateString()
+  }
+};
+
+export const ChatMessage = ({ message }) => {
+  const { text, photoURL, createdAt } = message;
+  const [date] = useState(getDateFrom(createdAt));
+
+  const classes = useStyles();
+
+  return (
+    <Card className={classes.root}>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="recipe" className={classes.avatar} src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+        }
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title="Comment from an amazing user"
+        subheader={date !== null ? date : "Someday"}
+      />
+      <CardContent>
+        <Typography variant="body2" color="textPrimary" component="p">
+          {text}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 }
