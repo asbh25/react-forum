@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { ChatMessage } from '../ChatMessage';
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
-import firebase, { auth, firestore } from '../../firebase/firebase';
+import { auth, firestore } from '../../firebase/firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +32,7 @@ export const Forum = () => {
 
     await messagesRef.add({
       text: formValue,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt: +Date.now(),
       uid,
       photoURL
     });

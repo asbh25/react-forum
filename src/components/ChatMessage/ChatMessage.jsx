@@ -16,10 +16,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const getDateFrom = timestramp => {
-  if (timestramp) {
-    return timestramp.toDate().toDateString()
-  }
+const getDateFrom = milliseconds => {
+  const t = new Date(1970, 0, 1); // Epoch
+  t.setSeconds(milliseconds / 1000);
+  return t.toDateString();
 };
 
 export const ChatMessage = ({ message }) => {
@@ -40,7 +40,7 @@ export const ChatMessage = ({ message }) => {
           </IconButton>
         }
         title="Comment from an amazing user"
-        subheader={date !== null ? date : "Someday"}
+        subheader={date}
       />
       <CardContent>
         <Typography variant="body2" color="textPrimary" component="p">
