@@ -31,24 +31,26 @@ export const ChatMessage = ({ message }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Comment from an amazing user"
-        subheader={date}
-      />
-      <CardContent>
-        <Typography variant="body2" color="textPrimary" component="p">
-          {text}
-        </Typography>
-      </CardContent>
-    </Card>
+    <div>
+      <Card className={classes.root}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title="Comment from an amazing user"
+          subheader={date}
+        />
+        <CardContent>
+          <Typography variant="body2" color="textPrimary" component="p">
+            {text}
+          </Typography>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

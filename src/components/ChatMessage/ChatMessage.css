@@ -1,38 +1,41 @@
-.MuiCard-root {
+/* .MuiCard-root {
   position: relative;
   z-index: 0;
-}
+} */
 
-.MuiCard-root:hover {
+/* .MuiCard-root:hover {
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);
   transition: transform .5s;
   cursor: pointer;
-}
+} */
+
+/* .MuiCardContent-root {
+  position: absolute;
+} */
 
 @media (min-width: 1000px) {
   .MuiCard-root {
     cursor: pointer;
   }
 
-  .MuiCard-root .MuiTypography-colorTextPrimary {
-    position: relative;
+  /* .MuiCardContent-root {
+    overflow: hidden;
     width: 300px;
     height: 20px;
-    overflow: hidden;
+  } */
+
+  .MuiTypography-colorTextPrimary {
     padding: 5px 10px;
-    z-index: -1;
-  }
-  
-  .MuiCard-root:hover .MuiTypography-colorTextPrimary {
-    height: auto;
-    cursor: pointer;
-    z-index: 1;
+    overflow: hidden;
+    width: 300px;
+    height: 20px;
   }
 
-  .MuiCard-root:hover {
-    position: relative;
-    z-index: 1000;
+  .MuiCard-root:hover .MuiCardContent-root .MuiTypography-colorTextPrimary {
+    height: auto;
+    position: absolute;
+    z-index: 1;
   }
 }
