@@ -13,7 +13,7 @@ import './ChatMessage.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 500,
+    maxWidth: 400,
     margin: 'auto',
   },
 }));
@@ -34,7 +34,7 @@ export const ChatMessage = ({ message }) => {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar} src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+          <Avatar aria-label="recipe" src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
         }
         action={
           <IconButton aria-label="settings">
