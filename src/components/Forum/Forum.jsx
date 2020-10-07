@@ -48,6 +48,15 @@ export const Forum = () => {
   }
 
   return (<>
+    <div className="container">
+      {messages && messages
+        .sort((a, b) => b.createdAt - a.createdAt)
+        .map(msg => 
+          <ChatMessage key={msg.id} message={msg} />
+        )
+      }
+    </div>
+
     <form onSubmit={sendMessage} className={classes.root}>
       <TextField
         required
@@ -69,14 +78,5 @@ export const Forum = () => {
         Send
       </Button>
     </form>
-
-    <div className="container">
-      {messages && messages
-        .sort((a, b) => b.createdAt - a.createdAt)
-        .map(msg => 
-          <ChatMessage key={msg.id} message={msg} />
-        )
-      }
-    </div>
   </>);
 }

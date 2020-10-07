@@ -1,6 +1,17 @@
 .makeStyles-root-4 {
   display: flex;
-  justify-content: center;
+  position: fixed;
+  left: 50%; bottom: 0;
+  margin: auto;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  background-color: #f2f3f4;
+}
+
+.container {
+  margin-top: 10px;
+  margin-bottom: 100px;
 }
 
 @media (min-width: 1000px) {

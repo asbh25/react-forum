@@ -9,26 +9,26 @@
   transform: scale(1.1);
   transition: transform .5s;
   cursor: pointer;
-  /* z-index: 1; */
 }
 
 @media (min-width: 1000px) {
   .MuiCard-root {
     cursor: pointer;
-    /* height: 150px; */
-    /* overflow: hidden; */
   }
 
-  .MuiTypography-colorTextPrimary {
+  .MuiCard-root .MuiTypography-colorTextPrimary {
+    position: relative;
     width: 300px;
     height: 20px;
     overflow: hidden;
     padding: 5px 10px;
+    z-index: -1;
   }
   
   .MuiCard-root:hover .MuiTypography-colorTextPrimary {
     height: auto;
     cursor: pointer;
+    z-index: 1;
   }
 
   .MuiCard-root:hover {
