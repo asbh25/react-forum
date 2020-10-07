@@ -1,6 +1,5 @@
 import React from 'react';
 import { Header } from './components/Header';
-import { SignIn } from './components/SignInOut';
 import { Forum } from './components/Forum';
 
 import { auth } from './firebase/firebase';
@@ -18,7 +17,7 @@ function App() {
       </header>
 
       <main className="main">
-        {user ? <Forum /> : <SignIn />}
+        {user ? <Forum /> : <p className="welcome-text">Sign in above and write down your amazing comment!</p>}
       </main>
     </div>
   );
