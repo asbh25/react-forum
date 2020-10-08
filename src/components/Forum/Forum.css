@@ -5,6 +5,7 @@
   bottom: 0;
   background-color: #ffffff;
   z-index: 5;
+  height: 65px;
 }
 
 .input-box {
