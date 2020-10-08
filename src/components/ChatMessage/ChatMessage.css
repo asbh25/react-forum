@@ -18,24 +18,22 @@
     -ms-transform: scale(1.1);
     transform: scale(1.1);
     transition: transform 0.5s;
-    cursor: pointer;
   }
 
   .MuiCard-root {
-    cursor: pointer;
     z-index: 1;
     width: 100%;
+  }
+
+  .MuiCard-root:hover {
+    position: absolute;
+    z-index: 4;
   }
 
   .wrapper {
     position: relative;
     display: flex;
     justify-content: center;
-  }
-
-  .MuiCard-root:hover {
-    position: absolute;
-    z-index: 4;
   }
 
   .MuiTypography-colorTextPrimary {

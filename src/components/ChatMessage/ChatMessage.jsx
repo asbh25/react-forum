@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getDateFrom = (milliseconds) => {
-  const t = new Date(1970, 0, 1); // Epoch
+  const t = new Date(1970, 0, 1);
   t.setSeconds(milliseconds / 1000);
   return t.toDateString();
 };

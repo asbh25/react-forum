@@ -12,9 +12,9 @@ export const SignIn = () => {
   }
 
   return (
-      <Button color="inherit" onClick={signInWithGoogle}>
-        Sign In
-      </Button>
+    <Button color="inherit" onClick={signInWithGoogle}>
+      Sign In
+    </Button>
   );
 };
 
