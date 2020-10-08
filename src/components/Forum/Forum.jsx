@@ -59,7 +59,7 @@ export const Forum = () => {
             ))}
       </div>
 
-      <form onSubmit={sendMessage} className={classes.root}>
+      <form onSubmit={sendMessage} className="makeStyles-root-4">
         <div className="input-box">
           <TextField
             required
