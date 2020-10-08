@@ -37,7 +37,7 @@ export const Forum = () => {
     const { uid, photoURL } = auth.currentUser;
 
     await messagesRef.add({
-      text: formValue,
+      text: formValue.trim(),
       createdAt: +Date.now(),
       uid,
       photoURL,
@@ -66,7 +66,7 @@ export const Forum = () => {
             id="standard-required"
             defaultValue="Say something nice"
             value={formValue}
-            onChange={({ target }) => setFormValue(target.value)}
+            onChange={({ target }) => setFormValue(target.value.trimLeft())}
             placeholder="Say something nice"
           />
 
