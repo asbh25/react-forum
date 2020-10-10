@@ -54,6 +54,20 @@ export const Forum = ({ user }) => {
     return 0;
   }
 
+  const removeComment = (createdAt) => {
+    // var postsRef = db.collection('posts');
+    let querys = messagesRef.where('createdAt', '==', createdAt).get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        console.log(doc.id, '=>', doc.data());
+        let deleteDoc = messagesRef.doc(doc.id).delete();
+      });
+    })
+    .catch(err => {
+      console.log('Error getting documents', err);
+    });
+  }
+
   return (
     <>
       <div className="container">
@@ -62,7 +76,7 @@ export const Forum = ({ user }) => {
             .sort((a, b) => b.createdAt - a.createdAt)
             .map((msg) => (
               <div className="wrapper" key={msg.id}>
-                <ChatMessage message={msg} userId={getUser()} key={msg.id} />
+                <ChatMessage message={msg} userId={getUser()} removeComment={removeComment} key={msg.id} />
               </div>
             ))}
       </div>

@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import "./ChatMessage.css";
 
@@ -23,14 +23,14 @@ const getDateFrom = (milliseconds) => {
   return t.toDateString();
 };
 
-export const ChatMessage = ({ message, userId }) => {
+export const ChatMessage = ({ message, userId, removeComment }) => {
   const { text, photoURL, createdAt, uid } = message;
   const [date] = useState(getDateFrom(createdAt));
 
   const classes = useStyles();
 
-  const handleClick = (event) => {
-    event.preventDefault();
+  const handleClick = () => {
+    // event.preventDefault();
 
     console.log("clicked");
   }
@@ -48,8 +48,8 @@ export const ChatMessage = ({ message, userId }) => {
           />
         }
         action={uid === userId && (
-            <IconButton aria-label="settings">
-              <MoreVertIcon onClick={handleClick}/>
+            <IconButton aria-label="delete" onClick={() => {removeComment(createdAt)}}>
+              <DeleteIcon />
             </IconButton>
         )}
         title="Comment from an AMAZING USER"
