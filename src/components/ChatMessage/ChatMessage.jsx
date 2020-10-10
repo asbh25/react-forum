@@ -29,12 +29,6 @@ export const ChatMessage = ({ message, userId, removeComment }) => {
 
   const classes = useStyles();
 
-  const handleClick = () => {
-    // event.preventDefault();
-
-    console.log("clicked");
-  }
-
   return (
     <Card className={classes.root}>
       <CardHeader

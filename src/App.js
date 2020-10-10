@@ -17,8 +17,7 @@ function App() {
       </header>
 
       <main className="main">
-        {/* {user ? <Forum /> : <p className="welcome-text">Sign in above and write down your amazing comment!</p>} */}
-        <Forum user={user} />
+        <Forum />
       </main>
     </div>
   );

@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Icon from "@material-ui/core/Icon";
 
-import { auth, firestore } from "../../firebase/firebase";
+import { auth, firestore, provider } from "../../firebase/firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 import "./Forum.css";
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Forum = ({ user }) => {
+export const Forum = () => {
   const classes = useStyles();
   const messagesRef = firestore.collection("messages");
   const query = messagesRef.orderBy("createdAt").limit(25);
@@ -33,6 +33,11 @@ export const Forum = ({ user }) => {
 
   const sendMessage = async (event) => {
     event.preventDefault();
+
+    if (!auth.currentUser) {
+      auth.signInWithPopup(provider);
+      return;
+    }
 
     const { uid, photoURL } = auth.currentUser;
 
@@ -47,7 +52,7 @@ export const Forum = ({ user }) => {
   };
 
   const getUser = () => {
-    if (auth.currentUser !== null) {
+    if (auth.currentUser) {
       return auth.currentUser.uid;
     }
 
@@ -55,17 +60,16 @@ export const Forum = ({ user }) => {
   }
 
   const removeComment = (createdAt) => {
-    // var postsRef = db.collection('posts');
-    let querys = messagesRef.where('createdAt', '==', createdAt).get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        console.log(doc.id, '=>', doc.data());
-        let deleteDoc = messagesRef.doc(doc.id).delete();
+    messagesRef.where('createdAt', '==', createdAt).get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          console.log(doc.id, '=>', doc.data());
+          messagesRef.doc(doc.id).delete();
+        });
+      })
+      .catch(err => {
+        console.log('Error getting documents', err);
       });
-    })
-    .catch(err => {
-      console.log('Error getting documents', err);
-    });
   }
 
   return (
@@ -81,31 +85,29 @@ export const Forum = ({ user }) => {
             ))}
       </div>
 
-      {user &&
-        (<form onSubmit={sendMessage} className="makeStyles-root-4">
-          <div className="input-box">
-            <TextField
-              required
-              id="standard-required"
-              defaultValue="Say something nice"
-              value={formValue}
-              onChange={({ target }) => setFormValue(target.value.trimLeft())}
-              placeholder="Say something nice"
-            />
+      <form onSubmit={sendMessage} className="makeStyles-root-4">
+        <div className="input-box">
+          <TextField
+            required
+            id="standard-required"
+            defaultValue="Say something nice"
+            value={formValue}
+            onChange={({ target }) => setFormValue(target.value.trimLeft())}
+            placeholder="Say something nice"
+          />
 
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              endIcon={<Icon>send</Icon>}
-              type="submit"
-              disabled={!formValue}
-            >
-              Send
-            </Button>
-          </div>
-        </form>
-      )}
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            endIcon={<Icon>send</Icon>}
+            type="submit"
+            disabled={!formValue}
+          >
+            Send
+          </Button>
+        </div>
+      </form>
     </>
   );
 };
