@@ -13,11 +13,12 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Header  user={user} />
+        <Header user={user} />
       </header>
 
       <main className="main">
-        {user ? <Forum /> : <p className="welcome-text">Sign in above and write down your amazing comment!</p>}
+        {/* {user ? <Forum /> : <p className="welcome-text">Sign in above and write down your amazing comment!</p>} */}
+        <Forum user={user} />
       </main>
     </div>
   );

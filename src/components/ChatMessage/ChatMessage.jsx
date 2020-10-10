@@ -11,7 +11,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import "./ChatMessage.css";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 400,
   },
@@ -23,11 +23,17 @@ const getDateFrom = (milliseconds) => {
   return t.toDateString();
 };
 
-export const ChatMessage = ({ message }) => {
-  const { text, photoURL, createdAt } = message;
+export const ChatMessage = ({ message, userId }) => {
+  const { text, photoURL, createdAt, uid } = message;
   const [date] = useState(getDateFrom(createdAt));
 
   const classes = useStyles();
+
+  const handleClick = (event) => {
+    event.preventDefault();
+
+    console.log("clicked");
+  }
 
   return (
     <Card className={classes.root}>
@@ -41,11 +47,11 @@ export const ChatMessage = ({ message }) => {
             }
           />
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        action={uid === userId && (
+            <IconButton aria-label="settings">
+              <MoreVertIcon onClick={handleClick}/>
+            </IconButton>
+        )}
         title="Comment from an AMAZING USER"
         subheader={date}
       />

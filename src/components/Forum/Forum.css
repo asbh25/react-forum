@@ -8,6 +8,10 @@
   height: 65px;
 }
 
+.makeStyles-root-4 .MuiTextField-root {
+  margin: 16px;
+}
+
 .input-box {
   margin: auto;
   display: flex;

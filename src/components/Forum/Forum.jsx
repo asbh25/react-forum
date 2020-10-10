@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Forum = () => {
+export const Forum = ({ user }) => {
   const classes = useStyles();
   const messagesRef = firestore.collection("messages");
   const query = messagesRef.orderBy("createdAt").limit(25);
@@ -46,6 +46,14 @@ export const Forum = () => {
     setFormValue("");
   };
 
+  const getUser = () => {
+    if (auth.currentUser !== null) {
+      return auth.currentUser.uid;
+    }
+
+    return 0;
+  }
+
   return (
     <>
       <div className="container">
@@ -54,34 +62,36 @@ export const Forum = () => {
             .sort((a, b) => b.createdAt - a.createdAt)
             .map((msg) => (
               <div className="wrapper" key={msg.id}>
-                <ChatMessage message={msg} />
+                <ChatMessage message={msg} userId={getUser()} key={msg.id} />
               </div>
             ))}
       </div>
 
-      <form onSubmit={sendMessage} className="makeStyles-root-4">
-        <div className="input-box">
-          <TextField
-            required
-            id="standard-required"
-            defaultValue="Say something nice"
-            value={formValue}
-            onChange={({ target }) => setFormValue(target.value.trimLeft())}
-            placeholder="Say something nice"
-          />
+      {user &&
+        (<form onSubmit={sendMessage} className="makeStyles-root-4">
+          <div className="input-box">
+            <TextField
+              required
+              id="standard-required"
+              defaultValue="Say something nice"
+              value={formValue}
+              onChange={({ target }) => setFormValue(target.value.trimLeft())}
+              placeholder="Say something nice"
+            />
 
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            endIcon={<Icon>send</Icon>}
-            type="submit"
-            disabled={!formValue}
-          >
-            Send
-          </Button>
-        </div>
-      </form>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              endIcon={<Icon>send</Icon>}
+              type="submit"
+              disabled={!formValue}
+            >
+              Send
+            </Button>
+          </div>
+        </form>
+      )}
     </>
   );
 };
